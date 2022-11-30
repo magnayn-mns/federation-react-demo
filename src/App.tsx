@@ -1,25 +1,51 @@
-import React from 'react';
+import React, { createContext, useContext } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { ApolloProvider } from "@apollo/client";
+import { apolloClient } from "./apollo-client";
+import { BrowserRouter, useLocation } from "react-router-dom";
+import AppRoutes from './AppRoutes';
+import { authConfig } from "./config";
+
+import { useProcessSignout, useProcessSignin, useAuth, AuthProvider } from './lib/auth';
+
+
+export function SignoutCallback() {
+  useProcessSignout();
+  return <></>;
+}
+
+export function SigninCallback() {
+useProcessSignin();
+
+const auth = useAuth();
+
+
+return (
+    <div
+        style={{
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+    >
+    Redirecting...
+
+    </div>
+);
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={apolloClient}>
+      <AuthProvider {...authConfig}>
+        <BrowserRouter basename="/app">
+        <AppRoutes />
+        </BrowserRouter>
+      </AuthProvider>
+    </ApolloProvider>
+  
   );
 }
 
