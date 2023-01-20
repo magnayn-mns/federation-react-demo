@@ -11,13 +11,13 @@ const commonAuthConfig = {
 
 const dev = {
   graphql: {
-    url: `http://${window.location.hostname}:8080/graphql`
+    url: `https://gql-federation-dev.azurewebsites.net/graphql/`
   }
 }
 
 const prod = {
   graphql: {
-    url: "/graphql",
+    url: "https://gql-federation-dev.azurewebsites.net/graphql/",
   }
 };
 

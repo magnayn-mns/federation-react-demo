@@ -8,6 +8,7 @@ import Go from "./components/Go";
 import { saveRequestUrl } from "./lib/auth/util";
 import { SigninCallback } from "./App";
 import { useAuth } from "./lib/auth";
+import Editor from "./components/Editor";
 
 
 //{user, redirectPath = '/welcome', children) => {
@@ -32,10 +33,13 @@ const auth = useAuth();
 console.log(auth);
   return (
     <Routes>
+      <Route index element={<ProtectedRoute redirectPath="/welcome" auth={auth}><Home/></ProtectedRoute>} />
       <Route path="/welcome" element={<Welcome/>} />    
       <Route path="/home" element={ <SigninCallback />} />
-      <Route path="/go" element={<div> <a>{"user " + auth.user}</a> <ProtectedRoute  redirectPath="/welcome" auth={auth}><Go/></ProtectedRoute></div>} />      
-        
+      <Route path="/editor" element={<ProtectedRoute  redirectPath="/welcome" auth={auth}><Editor/></ProtectedRoute>} />      
+      
+      <Route path="/go" element={<div> <a>{"user " + auth.user}</a> </div>} />      
+       
     </Routes>
   );
 }

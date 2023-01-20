@@ -1,0 +1,20 @@
+# Write your query or mutation here
+query getMyOrders {
+  customerOrderQueries {
+    ordersByLocationAndType(locationId: "10151", orderType: ORDER) {
+      __typename
+      ... on CustomerOrder_OrderByLocationAndTypeFailure {
+        error {
+          code
+          message
+        }
+      }
+      ... on CustomerOrder_OrderByLocationAndTypeSuccess {
+        orders {
+          id
+          version
+        }
+      }
+    }
+  }
+}

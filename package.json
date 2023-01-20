@@ -2,6 +2,7 @@
   "name": "feditest",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/app",
   "dependencies": {
     "@apollo/client": "^3.7.1",
     "@testing-library/jest-dom": "^5.16.5",
@@ -12,9 +13,10 @@
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
     "graphql": "^16.6.0",
+    "graphql-playground-react": "^1.7.28",
     "oidc-client-ts": "^2.2.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",    
+    "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
     "typescript": "^4.9.3",
@@ -24,7 +26,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "apollo:schema": "apollo schema:download --endpoint https://gql-federation-dev.azurewebsites.net/graphql/ ./src/graphql/schema.json",
+    "apollo:fakerschema": "apollo schema:download --endpoint https://gql-federation-dev.azurewebsites.net/graphql/ ./src/graphql/faker-schema.json",
+    "apollo:faker": "apollo codegen:generate --excludes=node_modules/* --includes=\"src/components/**/*.{tsx,ts}\" --endpoint=https://gql-federation-dev.azurewebsites.net/graphql/ --target typescript --tagName gql --outputFlat src/graphql/types/apollo",
+    "apollo:generate": "apollo codegen:generate --excludes=node_modules/* --includes=\"src/components/**/*.{tsx,ts}\" --endpoint=https://gql-federation-dev.azurewebsites.net/graphql/ --target typescript --tagName gql --outputFlat src/graphql/types/apollo",
+    "apollo:generate2": "apollo codegen:generate --config codegen.ts",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "eslintConfig": {
     "extends": [
@@ -43,5 +51,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "2.16.4",
+    "@graphql-codegen/client-preset": "1.2.6"
   }
 }

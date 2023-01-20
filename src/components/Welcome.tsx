@@ -8,7 +8,7 @@ export default function Welcome() {
   
     return (
       <div>
-          Welcome
+          <h1>Welcome</h1>
           <button onClick={signin}>Login</button>
       </div>
     );

@@ -1,5 +1,6 @@
 import { useAuth } from "../lib/auth";
-
+import { Provider } from 'react-redux'
+import { Playground, store } from 'graphql-playground-react'
 
 export default function Go() {
   const auth = useAuth();
@@ -8,9 +9,8 @@ export default function Go() {
         Go
       Access Token:
 
-      <pre>{auth.user?.access_token}</pre>
-      
-
+      <pre>{ "{\"Authorization\": \"Bearer " + auth.user?.access_token + "\"}"}</pre>
+   
     </div>
   );
 }
